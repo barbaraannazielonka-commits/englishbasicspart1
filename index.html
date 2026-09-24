@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>English Basics — Part 1</title>
+<style>
+  :root{
+    --ink:#20261f; --paper:#faf7ef; --line:#d8d0bd; --accent:#3d6b4f; --accent-ink:#f2efe2;
+    --wrong:#a4432f; --right:#3d6b4f; --card:#ffffff;
+    box-sizing:border-box;
+    padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+  }
+  :root:not([data-theme="light"]) { }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --ink:#eae6d9; --paper:#181a16; --line:#3a3d33; --accent:#7fb894; --accent-ink:#0e1210;
+      --wrong:#e08069; --right:#7fb894; --card:#20241d;
+    }
+  }
+  :root[data-theme="dark"]{
+    --ink:#eae6d9; --paper:#181a16; --line:#3a3d33; --accent:#7fb894; --accent-ink:#0e1210;
+    --wrong:#e08069; --right:#7fb894; --card:#20241d;
+  }
+  *{box-sizing:border-box}
+  html{scroll-padding-top:calc(64px + env(safe-area-inset-top,0px));}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:Georgia,'Iowan Old Style',serif;line-height:1.5;}
+  header{
+    position:sticky;top:0;padding-top:env(safe-area-inset-top,0px);
+    background:var(--paper);border-bottom:1px solid var(--line);z-index:10;
+  }
+  .head-inner{max-width:760px;margin:0 auto;padding:14px 20px;}
+  header h1{font-size:1.15rem;margin:0 0 8px;font-weight:700;letter-spacing:.2px;}
+  nav{display:flex;flex-wrap:wrap;gap:6px;overflow-x:auto;}
+  nav a{
+    font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+    font-size:.72rem;color:var(--ink);text-decoration:none;border:1px solid var(--line);
+    padding:5px 10px;border-radius:20px;white-space:nowrap;opacity:.8;
+  }
+  nav a:hover{opacity:1;border-color:var(--accent);}
+  main{max-width:760px;margin:0 auto;padding:28px 20px 80px;}
+  .intro{margin-bottom:36px;}
+  .intro h2{font-size:1.6rem;margin:0 0 10px;}
+  .intro p{max-width:62ch;}
+  .intro .focus{
+    font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+    background:var(--card);border:1px solid var(--line);border-radius:8px;
+    padding:14px 18px;margin-top:16px;font-size:.92rem;
+  }
+  .intro .focus strong{display:block;margin-bottom:6px;}
+  .goals{
+    max-width:62ch;background:var(--card);border:1px solid var(--line);border-radius:8px;
+    padding:18px 22px;margin-bottom:36px;
+  }
+  .goals h2{font-size:1.1rem;margin:0 0 8px;}
+  .goals p{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:.9rem;margin:0 0 8px;}
+  .goals ul{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:.88rem;margin:0;padding-left:20px;line-height:1.6;}
+  .goals li{margin-bottom:4px;}
+  section.unit{margin:52px 0;padding-top:12px;border-top:1px solid var(--line);}
+  section.unit h2{font-size:1.35rem;margin:0 0 6px;}
+  .purpose{font-size:.95rem;opacity:.85;max-width:62ch;margin:0 0 10px;}
+  .focus-line{
+    font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+    font-size:.82rem;background:var(--card);border-left:3px solid var(--accent);
+    padding:8px 12px;margin-bottom:18px;max-width:62ch;
+  }
+  .ref{font-size:.9rem;margin-bottom:18px;max-width:62ch;}
+  .ref table{border-collapse:collapse;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:.85rem;}
+  .ref td{padding:3px 12px 3px 0;}
+  .passage{
+    font-style:italic;max-width:62ch;background:var(--card);border:1px solid var(--line);
+    border-radius:8px;padding:16px 18px;margin-bottom:18px;font-size:1.02rem;
+  }
+  .task{
+    background:var(--card);border:1px solid var(--line);border-radius:8px;
+    padding:14px 16px;margin-bottom:12px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  }
+  .task .q{font-size:.95rem;margin-bottom:10px;}
+  .task .opts{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px;}
+  .task .opts button{
+    font-family:inherit;font-size:.85rem;padding:6px 12px;border-radius:6px;
+    border:1px solid var(--line);background:transparent;color:var(--ink);cursor:pointer;
+  }
+  .task .opts button:hover{border-color:var(--accent);}
+  .task input[type=text]{
+    font-family:inherit;font-size:.85rem;padding:6px 10px;border-radius:6px;
+    border:1px solid var(--line);background:var(--paper);color:var(--ink);width:180px;margin-right:8px;
+  }
+  .task .check{
+    font-family:inherit;font-size:.8rem;padding:6px 12px;border-radius:6px;
+    border:1px solid var(--accent);background:var(--accent);color:var(--accent-ink);cursor:pointer;
+  }
+  .fb{display:inline-block;margin-left:8px;font-size:.82rem;min-height:1.2em;}
+  .fb.correct{color:var(--right);}
+  .fb.wrong{color:var(--wrong);}
+  .progress{
+    font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:.75rem;
+    opacity:.7;margin-top:2px;
+  }
+  .totalscore{
+    font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+    font-size:1.05rem;font-weight:700;text-align:center;margin-top:40px;
+    border-top:1px solid var(--line);padding-top:20px;
+  }
+  footer{max-width:760px;margin:0 auto;padding:0 20px 60px;font-size:1.2rem;opacity:.8;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="head-inner">
+    <h1>English Basics — Part 1</h1>
+    <nav id="topnav"></nav>
+  </div>
+</header>
+
+<main>
+  <div class="intro">
+    <h2>What this site is for</h2>
+    <p>This is a practice site for absolute beginners in English. Each unit below covers one core building block — pronouns, vocabulary, or a grammar rule — and gives you tasks to test whether you can actually use it, not just recognise it.</p>
+    <div class="focus">
+      <strong>What to focus on as you go through it:</strong>
+      Don't rush to the tasks. Read the short explanation in each unit first, say the examples out loud, then attempt every task without looking back at the explanation. Get a task wrong? Re-read the rule, then try a similar sentence of your own — that's more useful than retrying the same task.
+    </div>
+  </div>
+
+  <div class="goals">
+    <h2>Læringsmål etter to uker med English Basics – Part 1</h2>
+    <p>Etter å ha jobbet gjennom enhetene på siden bør elevene kunne:</p>
+    <ul>
+      <li>Presentere seg selv og andre med I am / You are, inkludert kortformene (I'm, you're)</li>
+      <li>Si hvilket land de kommer fra og nasjonaliteten sin (f.eks. I am from Norway. I am Norwegian.)</li>
+      <li>Navngi grunnleggende farger og bruke dem til å beskrive ting</li>
+      <li>Snakke om en tredjeperson (he/she/it) i presens, med riktig -s/-es-ending, og lage spørsmål (Does he...?) og nektende setninger (I do not / don't like...)</li>
+      <li>Velge riktig mellom a og an basert på lyden i ordet som følger</li>
+      <li>Bruke riktig hilsen ut fra tidspunkt på dagen (good morning/afternoon/evening/night)</li>
+      <li>Tall opp til hundre, muntlig og skriftlig</li>
+      <li>Familieord (mother, siblings, grandparents osv.) og enkle setninger om egen familie</li>
+      <li>Klasseromsord (desk, board, pencil osv.) knyttet til riktig verb (sit at, write on, carry in)</li>
+      <li>Stille spørsmål med spørreord (what, where, when, who, why, how) med riktig ordstilling</li>
+      <li>Lese en kort, enkel tekst på engelsk og finne konkret informasjon i den (øvd via de fire lesetekstene)</li>
+    </ul>
+  </div>
+
+  <div id="units"></div>
+  <div id="totalscore" class="totalscore">Score: 0 / 0 correct</div>
+</main>
+
+<footer>Nannestad videregående skole — Barbara Anna Zielonka</footer>
+
+<script>
+const UNITS = [
+{
+  id:"u1", title:"1. I am / You are",
+  purpose:"This is the first sentence pattern you need — introducing yourself and talking to someone else.",
+  focus:"Focus on not mixing up am and are, and on the short forms (I'm, you're) which native speakers use constantly.",
+  ref:`<table><tr><td>I am</td><td>I'm</td></tr><tr><td>You are</td><td>You're</td></tr><tr><td>I am not</td><td>I'm not</td></tr></table>`,
+  tasks:[
+    {type:"mcq", q:"I ___ a student.", options:["am","is","are"], correct:"am"},
+    {type:"mcq", q:"You ___ my friend.", options:["is","are","am"], correct:"are"},
+    {type:"fill", q:"Complete: I ___ not tired.", answer:"am"},
+    {type:"mcq", q:"___ you ready?", options:["Is","Are","Am"], correct:"Are"}
+  ]
+},
+{
+  id:"u2", title:"2. Countries",
+  purpose:"Saying where you're from is usually the second thing people ask you in English.",
+  focus:"Focus on the pattern I am from [country] → I am [nationality], and that nationality words are capitalised.",
+  ref:`<table><tr><td>France</td><td>French</td></tr><tr><td>Spain</td><td>Spanish</td></tr><tr><td>Japan</td><td>Japanese</td></tr><tr><td>Brazil</td><td>Brazilian</td></tr><tr><td>the USA</td><td>American</td></tr><tr><td>Norway</td><td>Norwegian</td></tr><tr><td>Sweden</td><td>Swedish</td></tr><tr><td>Denmark</td><td>Danish</td></tr><tr><td>Poland</td><td>Polish</td></tr><tr><td>Germany</td><td>German</td></tr><tr><td>Italy</td><td>Italian</td></tr></table>`,
+  tasks:[
+    {type:"fill", q:"I am from Japan. I am ___.", answer:"Japanese"},
+    {type:"fill", q:"I am from France. I am ___.", answer:"French"},
+    {type:"mcq", q:"Someone from Brazil is...", options:["Brazilish","Brazilian","Brazilan"], correct:"Brazilian"},
+    {type:"fill", q:"I am from the USA. I am ___.", answer:"American"},
+    {type:"fill", q:"I am from Norway. I am ___.", answer:"Norwegian"},
+    {type:"fill", q:"I am from Sweden. I am ___.", answer:"Swedish"},
+    {type:"fill", q:"I am from Denmark. I am ___.", answer:"Danish"}
+  ]
+},
+{
+  id:"u3", title:"3. Colours",
+  purpose:"Colours are some of the most common describing words — used with clothes, objects, and food.",
+  focus:"Focus on spelling (colour vs color are both fine) and on using colour as an adjective before the noun.",
+  ref:`red, blue, green, yellow, black, white, orange, purple, pink, brown, grey`,
+  tasks:[
+    {type:"fill", q:"What colour is the sky?", answer:"blue"},
+    {type:"fill", q:"What colour is grass?", answer:"green"},
+    {type:"mcq", q:"What colour are bananas?", options:["red","blue","yellow"], correct:"yellow"},
+    {type:"fill", q:"What colour is snow?", answer:"white"}
+  ]
+},
+{
+  id:"u4", title:"4. He / She / It — Present Simple",
+  purpose:"Talking about a third person (not you, not me) is one of the most-used grammar points in everyday English.",
+  focus:"Focus on the extra -s or -es on the verb in positive sentences, and on using do/does instead in questions and negatives — the verb itself loses the -s there.",
+  ref:`<table><tr><td>work → works</td><td>go → goes</td></tr><tr><td>make → makes</td><td>do → does</td></tr><tr><td>study → studies</td><td>be → is</td></tr></table>
+    <p style="margin:10px 0 0">Questions: <b>Do</b> I/you/we/they ...? <b>Does</b> he/she/it ...? — e.g. Do you like pizza? Does she play tennis?</p>
+    <p style="margin:6px 0 0">Negatives: I/you/we/they <b>do not (don't)</b> ... — He/she/it <b>does not (doesn't)</b> ... — e.g. I do not like coffee. He doesn't like tea.</p>`,
+  tasks:[
+    {type:"fill", q:"He (play) ___ football.", answer:"plays"},
+    {type:"fill", q:"She (do) ___ her homework.", answer:"does"},
+    {type:"fill", q:"It (make) ___ a strange noise.", answer:"makes"},
+    {type:"mcq", q:"Which is correct?", options:["She go to school","She goes to school"], correct:"She goes to school"},
+    {type:"fill", q:"___ you like pizza? (question)", answer:"do"},
+    {type:"fill", q:"___ he like coffee? (question)", answer:"does"},
+    {type:"fill", q:"I ___ like fish. (negative, full form — two words)", answer:"do not"},
+    {type:"mcq", q:"Which is correct?", options:["He don't like tea","He doesn't like tea"], correct:"He doesn't like tea"}
+  ]
+},
+{
+  id:"u5", title:"5. a vs an",
+  purpose:"You use one of these before almost every singular noun, so getting it automatic matters early.",
+  focus:"Focus on the sound, not the letter — it's about whether the next word starts with a vowel sound.",
+  ref:`a dog, a cat, a house, a car · a university, a European, a one-way street (all sound like "y..." or "w...") · an apple, an egg, an orange, an idea · an hour, an honest man (silent h) · a user, a UFO (sound like "y")`,
+  tasks:[
+    {type:"mcq", q:"___ orange", options:["a","an"], correct:"an"},
+    {type:"mcq", q:"___ book", options:["a","an"], correct:"a"},
+    {type:"mcq", q:"___ elephant", options:["a","an"], correct:"an"},
+    {type:"mcq", q:"___ university", options:["a","an"], correct:"a"},
+    {type:"mcq", q:"___ hour", options:["a","an"], correct:"an"},
+    {type:"mcq", q:"___ egg", options:["a","an"], correct:"an"},
+    {type:"mcq", q:"___ house", options:["a","an"], correct:"a"},
+    {type:"mcq", q:"___ umbrella", options:["a","an"], correct:"an"}
+  ]
+},
+{
+  id:"u6", title:"6. Good morning / Good evening",
+  purpose:"These greetings are the first thing you'll say in almost any conversation, so timing them right matters.",
+  focus:"Focus on the time boundaries below, and that 'good night' is a goodbye, not a greeting.",
+  ref:`<table><tr><td>Until ~12pm</td><td>Good morning</td></tr><tr><td>12pm–6pm</td><td>Good afternoon</td></tr><tr><td>After 6pm</td><td>Good evening</td></tr><tr><td>Leaving / bed</td><td>Good night</td></tr></table>`,
+  tasks:[
+    {type:"mcq", q:"What do you say at 8:00 AM?", options:["Good morning","Good evening"], correct:"Good morning"},
+    {type:"mcq", q:"What do you say at 9:00 PM?", options:["Good afternoon","Good evening"], correct:"Good evening"},
+    {type:"mcq", q:"What do you say right before bed?", options:["Good night","Good morning"], correct:"Good night"},
+    {type:"fill", q:"It's 2pm. Complete: \"___ afternoon!\"", answer:"good"}
+  ]
+},
+{
+  id:"u7", title:"7. Numbers",
+  purpose:"Numbers show up everywhere: age, price, time, phone numbers — you can't avoid them.",
+  focus:"Focus on 13–19 (they all end in -teen) and the tens (they all end in -ty) — beginners often mix these up.",
+  ref:`0 zero – 20 twenty, then 30 thirty, 40 forty, 50 fifty ... 100 one hundred`,
+  tasks:[
+    {type:"fill", q:"Write 15 in words.", answer:"fifteen"},
+    {type:"fill", q:"Write 7 in words.", answer:"seven"},
+    {type:"fill", q:"Write 42 in words.", answer:"forty-two"},
+    {type:"mcq", q:"Which number is \"twenty\"?", options:["12","20","2"], correct:"20"}
+  ]
+},
+{
+  id:"u8", title:"8. Family vocabulary",
+  purpose:"You'll talk about your family early and often — in introductions, small talk, and stories.",
+  focus:"Focus on the group words (parents, siblings, grandparents) as well as the individual ones.",
+  ref:`mother/father → parents · sister/brother → siblings · grandmother/grandfather → grandparents · aunt/uncle · cousin · son/daughter · husband/wife`,
+  tasks:[
+    {type:"mcq", q:"Your mother's sister is your...", options:["aunt","uncle","cousin"], correct:"aunt"},
+    {type:"mcq", q:"Your father's father is your...", options:["grandfather","uncle"], correct:"grandfather"},
+    {type:"fill", q:"A brother and a sister together are called ___.", answer:"siblings"},
+    {type:"fill", q:"Your mother and father together are your ___.", answer:"parents"}
+  ]
+},
+{
+  id:"u9", title:"9. Classroom vocabulary",
+  purpose:"If you're learning in a classroom (or online class), you need the words for the room itself.",
+  focus:"Focus on the verbs that go with these objects: open a book, sit at a desk, write on the board.",
+  ref:`teacher, student, book, pen, pencil, desk, chair, board, classroom, bag, notebook, eraser, ruler`,
+  tasks:[
+    {type:"mcq", q:"Where does the teacher write?", options:["the board","the chair"], correct:"the board"},
+    {type:"mcq", q:"What do you carry your books in?", options:["a bag","a board","a chair"], correct:"a bag"},
+    {type:"fill", q:"You sit at a ___.", answer:"desk"},
+    {type:"mcq", q:"You write with a...", options:["pen","chair","board"], correct:"pen"}
+  ]
+},
+{
+  id:"r1", title:"10. Reading: My Name Is Anna",
+  purpose:"A short introduction text using I am/you are, countries, colours, and family words together.",
+  focus:"Read the whole text once for the general idea, then read it again to find each answer.",
+  passage:`"Hello! I am Anna. I am from Norway. I am Norwegian. My favourite colour is blue. I have one brother and one sister. My mother is a teacher and my father is a doctor. We live in a small house near Oslo."`,
+  tasks:[
+    {type:"mcq", q:"Where is Anna from?", options:["Norway","Sweden","Denmark"], correct:"Norway"},
+    {type:"mcq", q:"What is Anna's favourite colour?", options:["red","blue","green"], correct:"blue"},
+    {type:"mcq", q:"How many siblings does Anna have?", options:["one","two","three"], correct:"two"},
+    {type:"mcq", q:"What is Anna's mother's job?", options:["doctor","teacher","student"], correct:"teacher"}
+  ]
+},
+{
+  id:"r2", title:"11. Reading: A Day at School",
+  purpose:"A short text using classroom vocabulary and he/she + present simple.",
+  focus:"Pay attention to who does what — the teacher's actions and Peter's actions are different.",
+  passage:`"Peter is a student. He goes to school every morning. His classroom has a big board, twenty desks, and one teacher. Peter's teacher is Mrs. Olsen. She writes on the board and helps the students. Peter does not like maths, but he likes English. He always brings a pen, a pencil, and a notebook in his bag."`,
+  tasks:[
+    {type:"mcq", q:"Who is Peter's teacher?", options:["Anna","Mrs. Olsen","Mr. Hansen"], correct:"Mrs. Olsen"},
+    {type:"mcq", q:"What does the teacher write on?", options:["a book","the board","a desk"], correct:"the board"},
+    {type:"mcq", q:"Does Peter like maths?", options:["Yes","No"], correct:"No"},
+    {type:"mcq", q:"What does Peter carry in his bag?", options:["a chair","a pen, a pencil, and a notebook","shoes"], correct:"a pen, a pencil, and a notebook"}
+  ]
+},
+{
+  id:"u12", title:"12. Wh Questions",
+  purpose:"Wh-questions let you ask for specific information — a name, a place, a time, a reason — instead of just yes or no.",
+  focus:"Focus on the word order: Wh-word + do/does/is/are + subject + verb. There's no do/does when who is the subject itself.",
+  ref:`<table><tr><td>What</td><td>What is your name?</td></tr><tr><td>Where</td><td>Where are you from?</td></tr><tr><td>When</td><td>When do you study English?</td></tr><tr><td>Who</td><td>Who is your teacher?</td></tr><tr><td>Why</td><td>Why do you like English?</td></tr><tr><td>How</td><td>How are you?</td></tr></table>`,
+  tasks:[
+    {type:"fill", q:"___ is your name?", answer:"what"},
+    {type:"fill", q:"___ are you from?", answer:"where"},
+    {type:"mcq", q:"___ do you study English?", options:["What","When","Who"], correct:"When"},
+    {type:"fill", q:"___ is your teacher?", answer:"who"},
+    {type:"mcq", q:"Which word asks for a reason?", options:["How","Why","Where"], correct:"Why"}
+  ]
+},
+{
+  id:"r3", title:"13. Reading: Family Numbers",
+  purpose:"A short text combining numbers, family vocabulary, and a/an.",
+  focus:"The numbers in this text are written as words — match them to the digits in the questions.",
+  passage:`"I have a big family. I have an uncle who lives in Sweden and an aunt who lives in Denmark. My grandmother is seventy years old, and my grandfather is seventy-two. I have three cousins: two girls and one boy. Every summer, all fourteen of us meet at my grandparents' house."`,
+  tasks:[
+    {type:"mcq", q:"Where does the uncle live?", options:["Sweden","Denmark","Norway"], correct:"Sweden"},
+    {type:"mcq", q:"How old is the grandmother?", options:["seventy","seventy-two","seventeen"], correct:"seventy"},
+    {type:"mcq", q:"How many cousins does the person have?", options:["two","three","four"], correct:"three"},
+    {type:"mcq", q:"How many people meet every summer?", options:["seventy","fourteen","forty"], correct:"fourteen"}
+  ]
+},
+{
+  id:"r4", title:"14. Reading: Good Morning, Good Evening",
+  purpose:"A short text combining the time-of-day greetings.",
+  focus:"Match each time of day in the text to the greeting Maria uses.",
+  passage:`"It is eight o'clock in the morning. Maria says, 'Good morning!' to her neighbour. At two o'clock in the afternoon, she says, 'Good afternoon!' to her friend Peter. In the evening, at seven o'clock, she says, 'Good evening!' to her family. Before she goes to bed, she says, 'Good night, everyone!'"`,
+  tasks:[
+    {type:"mcq", q:"What does Maria say at 8 AM?", options:["Good morning","Good afternoon","Good evening"], correct:"Good morning"},
+    {type:"mcq", q:"What does Maria say at 2 PM?", options:["Good morning","Good afternoon","Good night"], correct:"Good afternoon"},
+    {type:"mcq", q:"What does Maria say before bed?", options:["Good evening","Good night","Good afternoon"], correct:"Good night"},
+    {type:"mcq", q:"Who does she greet in the evening?", options:["her neighbour","her friend","her family"], correct:"her family"}
+  ]
+}
+];
+
+const unitsEl = document.getElementById("units");
+const navEl = document.getElementById("topnav");
+
+UNITS.forEach((u, ui) => {
+  const a = document.createElement("a");
+  a.href = "#" + u.id;
+  a.textContent = u.title.replace(/^\d+\.\s*/, "");
+  navEl.appendChild(a);
+
+  const sec = document.createElement("section");
+  sec.className = "unit";
+  sec.id = u.id;
+
+  let tasksHtml = "";
+  u.tasks.forEach((t, ti) => {
+    const tid = u.id + "-t" + ti;
+    if (t.type === "mcq") {
+      const opts = t.options.map(o =>
+        `<button type="button" onclick="answerMcq('${tid}','${escAttr(o)}','${escAttr(t.correct)}')">${o}</button>`
+      ).join("");
+      tasksHtml += `<div class="task"><div class="q">${ti+1}. ${t.q}</div>
+        <div class="opts">${opts}</div><span class="fb" id="${tid}-fb"></span></div>`;
+    } else {
+      tasksHtml += `<div class="task"><div class="q">${ti+1}. ${t.q}</div>
+        <input type="text" id="${tid}-in" placeholder="type your answer">
+        <button type="button" class="check" onclick="answerFill('${tid}','${escAttr(t.answer)}')">Check</button>
+        <span class="fb" id="${tid}-fb"></span></div>`;
+    }
+  });
+
+  sec.innerHTML = `
+    <h2>${u.title}</h2>
+    <p class="purpose">${u.purpose}</p>
+    <div class="focus-line"><strong>Focus:</strong> ${u.focus}</div>
+    ${u.passage ? `<div class="passage">${u.passage}</div>` : ""}
+    ${u.ref ? `<div class="ref">${u.ref}</div>` : ""}
+    ${tasksHtml}
+    <div class="progress" id="${u.id}-progress">0 / ${u.tasks.length} correct</div>
+  `;
+  unitsEl.appendChild(sec);
+});
+
+const state = {};
+const TOTAL_TASKS = UNITS.reduce((sum, u) => sum + u.tasks.length, 0);
+document.getElementById("totalscore").textContent = "Score: 0 / " + TOTAL_TASKS + " correct";
+
+function escAttr(s){ return String(s).replace(/'/g,"\\'"); }
+
+function updateTotalScore(){
+  const correctCount = Object.values(state).filter(Boolean).length;
+  document.getElementById("totalscore").textContent = "Score: " + correctCount + " / " + TOTAL_TASKS + " correct";
+}
+
+function markDone(tid, ok){
+  if(!state[tid]) {
+    state[tid] = ok;
+    const unitId = tid.split("-t")[0];
+    const doneCount = Object.keys(state).filter(k => k.startsWith(unitId+"-") && state[k]).length;
+    const total = UNITS.find(u=>u.id===unitId).tasks.length;
+    document.getElementById(unitId+"-progress").textContent = doneCount + " / " + total + " correct";
+    updateTotalScore();
+  }
+}
+
+function answerMcq(tid, chosen, correct){
+  const fb = document.getElementById(tid+"-fb");
+  const ok = chosen === correct;
+  fb.textContent = ok ? "Correct" : ("Not quite — answer: " + correct);
+  fb.className = "fb " + (ok ? "correct" : "wrong");
+  if(ok) markDone(tid, true);
+}
+
+function answerFill(tid, correct){
+  const input = document.getElementById(tid+"-in");
+  const fb = document.getElementById(tid+"-fb");
+  const val = input.value.trim().toLowerCase();
+  const ok = val === correct.toLowerCase();
+  fb.textContent = ok ? "Correct" : ("Not quite — answer: " + correct);
+  fb.className = "fb " + (ok ? "correct" : "wrong");
+  if(ok) markDone(tid, true);
+}
+</script>
+</body>
+</html>
